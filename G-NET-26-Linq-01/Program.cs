@@ -17,23 +17,34 @@ namespace G_NET_26_Linq_01
         }
         public static void Main(string[] args)
         {
+            List<Product> products = new List<Product>
+            {
+            new Product { Name = "Ikura", Category = "Seafood" },
+            new Product { Name = "Chai", Category = "Beverages" },
+            new Product { Name = "Boston Crab Meat", Category = "Seafood" },
+            new Product { Name = "Tofu", Category = "Produce" }
+            };
+
             #region Q1
-                //List<Product> products = new List<Product>
-                //{
-                //new Product { Name = "Ikura", Category = "Seafood" },
-                //new Product { Name = "Chai", Category = "Beverages" },
-                //new Product { Name = "Boston Crab Meat", Category = "Seafood" },
-                //new Product { Name = "Tofu", Category = "Produce" }
-                //};
 
-                //var seafoodProducts = products.Where(p => p.Category == "Seafood");
+            var seafoodProducts = products.Where(p => p.Category == "Seafood");
 
-                //foreach (var product in seafoodProducts)
-                //{
-                //    Console.WriteLine($"Name: {product.Name},Category: {product.Category}");
-                //}
+            foreach (var product in seafoodProducts)
+            {
+                Console.WriteLine($"Name: {product.Name},Category: {product.Category}");
+            }
 
             #endregion
+            #region Q2
+            Console.WriteLine();
+            var productNames = products.Select(p => p.Name);
+
+            foreach (var name in productNames)
+            {
+                Console.Write($"{name}, ");
+            }
+
+            #endregion 
         }
     }
 }
