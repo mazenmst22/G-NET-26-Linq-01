@@ -21,7 +21,7 @@ namespace G_NET_26_Linq_01
             List<Product> products = new List<Product>
             {
             new Product { Name = "Ikura", Category = "Seafood", UnitPrice = 31.00 },
-            new Product { Name = "Chai", Category = "Beverages", UnitPrice  = 18.00 },
+            new Product { Name = "Chai", Category = "Beverages", UnitPrice  = 2.35 },
             new Product { Name = "Boston Crab Meat", Category = "Seafood", UnitPrice = 18.40 },
             new Product { Name = "Tofu", Category = "Produce", UnitPrice = 23.25 }
             };
@@ -52,10 +52,19 @@ namespace G_NET_26_Linq_01
 
             foreach (var product in sortedProducts)
             {
-                Console.WriteLine($"Name: {product.Name}, Price: {product.UnitPrice}");
+                Console.WriteLine($"Name: {product.Name}, Price: ${product.UnitPrice}");
             }
-            
 
+
+            #endregion
+            #region Q4
+            Console.WriteLine();
+            var filteredProducts = products.Where(p => p.UnitPrice >= 10 && p.UnitPrice <= 30);
+
+            foreach (var product in filteredProducts)
+            {
+                Console.WriteLine($"{product.Name}, Price: ${product.UnitPrice}");
+            }
             #endregion 
         }
     }
