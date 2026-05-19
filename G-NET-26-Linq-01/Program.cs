@@ -79,7 +79,21 @@ namespace G_NET_26_Linq_01
             {
                 Console.WriteLine($"Product: {product.Name}, Category: {product.Category}, Stock: {product.unitsInStock}");
             }
-            #endregion 
+            #endregion
+            #region Q6
+            Console.WriteLine();
+            var productStatus = products.Select(p => new
+            {
+                Name = p.Name,
+                Price = p.UnitPrice,
+                Status = p.unitsInStock > 0 ? "Available" : "Out of Stock"
+            });
+            foreach (var item in productStatus)
+            {
+                Console.WriteLine($"Name: {item.Name}, Price: ${item.Price}, Availability: {item.Status}");
+            }
+            #endregion
+            
 
         }
     }
