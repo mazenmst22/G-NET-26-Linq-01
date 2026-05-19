@@ -93,7 +93,19 @@ namespace G_NET_26_Linq_01
                 Console.WriteLine($"Name: {item.Name}, Price: ${item.Price}, Availability: {item.Status}");
             }
             #endregion
-            
+            #region Q7
+            Console.WriteLine();
+            var idx = products.Select((p,index)=> new
+            {
+                Position = index+1,
+                Name = p.Name,
+                
+            });
+            foreach(var item in idx)
+            {
+                Console.WriteLine($"{item.Position}.{item.Name}");
+            }
+            #endregion
 
         }
     }
