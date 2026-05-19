@@ -106,6 +106,16 @@ namespace G_NET_26_Linq_01
                 Console.WriteLine($"{item.Position}.{item.Name}");
             }
             #endregion
+            #region Q8
+            Console.WriteLine();
+            var Sorted = products
+                .OrderBy(p => p.Category)
+                .ThenByDescending(p => p.UnitPrice);
+            foreach (var product in sortedProducts)
+            {
+                Console.WriteLine($"Category: {product.Category}, Name: {product.Name}, Price: ${product.UnitPrice}");
+            }
+            #endregion
 
         }
     }
