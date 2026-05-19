@@ -14,15 +14,16 @@ namespace G_NET_26_Linq_01
         {
             public string Name { get; set; }
             public string Category { get; set; }
+            public double UnitPrice { get; set; }
         }
         public static void Main(string[] args)
         {
             List<Product> products = new List<Product>
             {
-            new Product { Name = "Ikura", Category = "Seafood" },
-            new Product { Name = "Chai", Category = "Beverages" },
-            new Product { Name = "Boston Crab Meat", Category = "Seafood" },
-            new Product { Name = "Tofu", Category = "Produce" }
+            new Product { Name = "Ikura", Category = "Seafood", UnitPrice = 31.00 },
+            new Product { Name = "Chai", Category = "Beverages", UnitPrice  = 18.00 },
+            new Product { Name = "Boston Crab Meat", Category = "Seafood", UnitPrice = 18.40 },
+            new Product { Name = "Tofu", Category = "Produce", UnitPrice = 23.25 }
             };
 
             #region Q1
@@ -43,6 +44,17 @@ namespace G_NET_26_Linq_01
             {
                 Console.Write($"{name}, ");
             }
+
+            #endregion
+            #region Q3
+            Console.WriteLine();
+            var sortedProducts = products.OrderBy(p => p.UnitPrice);
+
+            foreach (var product in sortedProducts)
+            {
+                Console.WriteLine($"Name: {product.Name}, Price: {product.UnitPrice}");
+            }
+            
 
             #endregion 
         }
