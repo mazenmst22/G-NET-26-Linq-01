@@ -17,6 +17,17 @@ namespace G_NET_26_Linq_01
             public double UnitPrice { get; set; }
             public int unitsInStock { get; set; }
         }
+        //Q10
+        public class Order
+        {
+            public DateTime OrderDate { get; set; }
+        }
+
+        public class Customer
+        {
+            public string CustomerID { get; set; }
+            public List<Order> Orders { get; set; }
+        }
         public static void Main(string[] args)
         {
             List<Product> products = new List<Product>
@@ -124,6 +135,49 @@ namespace G_NET_26_Linq_01
             foreach (var product in BeverageSort)
             {
                 Console.WriteLine($"{product.Name}, Stock: {product.unitsInStock}");
+            }
+            #endregion
+            #region Q10
+            Console.WriteLine();
+            List<Customer> customers = new List<Customer>
+            {
+                new Customer
+                {
+                    CustomerID = "KEHBMP",
+                    Orders = new List<Order>
+                    {
+                        new Order { OrderDate = new DateTime(1996, 8, 25) },
+                        new Order { OrderDate = new DateTime(1997, 10, 3) },
+                        new Order { OrderDate = new DateTime(1998, 1, 15) }
+                    }
+                },
+                new Customer
+                {
+                    CustomerID = "ANATR",
+                    Orders = new List<Order>
+                    {
+                        new Order { OrderDate = new DateTime(1996, 11, 28) }
+                    }
+                },
+                new Customer
+                {
+                    CustomerID = "BERGS",
+                    Orders = new List<Order>
+                    {
+                        new Order { OrderDate = new DateTime(1997, 3, 4) }
+                    }
+                }
+            };
+
+            var recentOrders =
+                from c in customers
+                from o in c.Orders
+                where o.OrderDate.Year >= 1997
+                select new { c.CustomerID, o.OrderDate };
+
+            foreach (var item in recentOrders)
+            {
+                Console.WriteLine($"Customer: {item.CustomerID}, Date: {item.OrderDate:dd/MM/yyyy}");
             }
             #endregion
 
