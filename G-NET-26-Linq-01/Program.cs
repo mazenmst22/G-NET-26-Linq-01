@@ -6,52 +6,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 #endregion
+
+using static G_NET_26_Linq_01.DataSource.Source;
 namespace G_NET_26_Linq_01
 {
     public class Program
     {
-        #region pre code
-        public class Product
-        {
-            public string Name { get; set; }
-            public string Category { get; set; }
-            public double UnitPrice { get; set; }
-            public int unitsInStock { get; set; }
-        }
-        //Q10
-        public class Order
-        {
-            public DateTime OrderDate { get; set; }
-        }
-
-        public class Customer
-        {
-            public string CustomerID { get; set; }
-            public List<Order> Orders { get; set; }
-        }
-        #endregion
+        
         public static void Main(string[] args)
         {
-            #region pre code
-            List<Product> products = new List<Product>
-            {
-            new Product { Name = "Ikura", Category = "Seafood", UnitPrice = 31.00, unitsInStock = 13 },
-            new Product { Name = "Chai", Category = "Beverages", UnitPrice  = 2.35, unitsInStock = 110 },
-            new Product { Name = "Boston Crab Meat", Category = "Seafood", UnitPrice = 18.40, unitsInStock =0 },
-            new Product { Name = "Tofu", Category = "Produce", UnitPrice = 23.25, unitsInStock =35},
-            new Product { Name = "Aniseed Syrup", Category = "Condiments",UnitPrice =12.00,  unitsInStock = 13 },
-            new Product { Name = "Chef Anton's Cajun Seasoning", Category = "Condiments",UnitPrice =18.00, unitsInStock = 0 },
-            new Product { Name = "Grandma's Boysenberry Spread", Category = "Condiments",UnitPrice =23.34, unitsInStock = 120 },
-            new Product { Name = "Karak", Category = "Beverages",UnitPrice =4.75, unitsInStock = 35 }
-            };
-            #endregion
             #region Q1
 
-            var seafoodProducts = products.Where(p => p.Category == "Seafood");
+            var seafoodProducts = ProductList.Where(p => p.Category == "Seafood");
 
             foreach (var product in seafoodProducts)
             {
-                Console.WriteLine($"Name: {product.Name},Category: {product.Category}");
+                Console.WriteLine($"Name: {product.ProductName},Category: {product.Category}");
             }
 
             #endregion
@@ -59,7 +29,7 @@ namespace G_NET_26_Linq_01
             Console.WriteLine();
             Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine();
-            var productNames = products.Select(p => p.Name);
+            var productNames = ProductList.Select(p => p.ProductName);
 
             foreach (var name in productNames)
             {
@@ -71,11 +41,11 @@ namespace G_NET_26_Linq_01
             Console.WriteLine();
             Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine();
-            var sortedProducts = products.OrderBy(p => p.UnitPrice);
+            var sortedProducts = ProductList.OrderBy(p => p.UnitPrice);
 
             foreach (var product in sortedProducts)
             {
-                Console.WriteLine($"Name: {product.Name}, Price: ${product.UnitPrice}");
+                Console.WriteLine($"Name: {product.ProductName}, Price: ${product.UnitPrice}");
             }
 
 
@@ -84,33 +54,33 @@ namespace G_NET_26_Linq_01
             Console.WriteLine();
             Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine();
-            var filteredProducts = products.Where(p => p.UnitPrice >= 10 && p.UnitPrice <= 30);
+            var filteredProducts = ProductList.Where(p => p.UnitPrice >= 10 && p.UnitPrice <= 30);
 
             foreach (var product in filteredProducts)
             {
-                Console.WriteLine($"{product.Name}, Price: ${product.UnitPrice}");
+                Console.WriteLine($"{product.ProductName}, Price: ${product.UnitPrice}");
             }
             #endregion
             #region Q5
             Console.WriteLine();
             Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine();
-            var inStock = products.Where(p => p.unitsInStock > 0 && p.Category == "Condiments");
+            var inStock = ProductList.Where(p => p.UnitsInStock > 0 && p.Category == "Condiments");
 
             foreach (var product in inStock)
             {
-                Console.WriteLine($"Product: {product.Name}, Category: {product.Category}, Stock: {product.unitsInStock}");
+                Console.WriteLine($"Product: {product.ProductName}, Category: {product.Category}, Stock: {product.UnitsInStock}");
             }
             #endregion
             #region Q6
             Console.WriteLine();
             Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine();
-            var productStatus = products.Select(p => new
+            var productStatus = ProductList.Select(p => new
             {
-                Name = p.Name,
+                Name = p.ProductName,
                 Price = p.UnitPrice,
-                Status = p.unitsInStock > 0 ? "Available" : "Out of Stock"
+                Status = p.UnitsInStock > 0 ? "Available" : "Out of Stock"
             });
             foreach (var item in productStatus)
             {
@@ -121,10 +91,10 @@ namespace G_NET_26_Linq_01
             Console.WriteLine();
             Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine();
-            var idx = products.Select((p,index)=> new
+            var idx = ProductList.Select((p,index)=> new
             {
                 Position = index+1,
-                Name = p.Name,
+                Name = p.ProductName,
                 
             });
             foreach(var item in idx)
@@ -136,62 +106,34 @@ namespace G_NET_26_Linq_01
             Console.WriteLine();
             Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine();
-            var Sorted = products
+            var Sorted = ProductList
                 .OrderBy(p => p.Category)
                 .ThenByDescending(p => p.UnitPrice);
             foreach (var product in sortedProducts)
             {
-                Console.WriteLine($"Category: {product.Category}, Name: {product.Name}, Price: ${product.UnitPrice}");
+                Console.WriteLine($"Category: {product.Category}, Name: {product.ProductName}, Price: ${product.UnitPrice}");
             }
             #endregion
             #region Q9
             Console.WriteLine();
             Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine();
-            var BeverageSort = products
+            var BeverageSort = ProductList
                 .Where(p =>  p.Category == "Beverages")
-                .OrderByDescending(p => p.unitsInStock);
+                .OrderByDescending(p => p.UnitsInStock);
             foreach (var product in BeverageSort)
             {
-                Console.WriteLine($"{product.Name}, Stock: {product.unitsInStock}");
+                Console.WriteLine($"{product.ProductName}, Stock: {product.UnitsInStock}");
             }
             #endregion
             #region Q10
             Console.WriteLine();
             Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine();
-            List<Customer> customers = new List<Customer>
-            {
-                new Customer
-                {
-                    CustomerID = "KEHBMP",
-                    Orders = new List<Order>
-                    {
-                        new Order { OrderDate = new DateTime(1996, 8, 25) },
-                        new Order { OrderDate = new DateTime(1997, 10, 3) },
-                        new Order { OrderDate = new DateTime(1998, 1, 15) }
-                    }
-                },
-                new Customer
-                {
-                    CustomerID = "ANATR",
-                    Orders = new List<Order>
-                    {
-                        new Order { OrderDate = new DateTime(1996, 11, 28) }
-                    }
-                },
-                new Customer
-                {
-                    CustomerID = "BERGS",
-                    Orders = new List<Order>
-                    {
-                        new Order { OrderDate = new DateTime(1997, 3, 4) }
-                    }
-                }
-            };
+           
 
             var recentOrders =
-                from c in customers
+                from c in CustomerList
                 from o in c.Orders
                 where o.OrderDate.Year >= 1997
                 select new { c.CustomerID, o.OrderDate };
@@ -205,7 +147,7 @@ namespace G_NET_26_Linq_01
             Console.WriteLine();
             Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine();
-            var idx1 = products
+            var idx1 = ProductList
             .Select((p, index) => new
             {
                 Position = index + 1,
@@ -214,7 +156,7 @@ namespace G_NET_26_Linq_01
 
             foreach (var item in idx1)
             {
-                Console.WriteLine($"{item.Position}. {item.Product.Name}");
+                Console.WriteLine($"{item.Position}. {item.Product.ProductName}");
             }
             #endregion
             #region Q12
