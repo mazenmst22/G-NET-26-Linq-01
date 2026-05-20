@@ -10,6 +10,7 @@ namespace G_NET_26_Linq_01
 {
     public class Program
     {
+        #region pre code
         public class Product
         {
             public string Name { get; set; }
@@ -28,8 +29,10 @@ namespace G_NET_26_Linq_01
             public string CustomerID { get; set; }
             public List<Order> Orders { get; set; }
         }
+        #endregion
         public static void Main(string[] args)
         {
+            #region pre code
             List<Product> products = new List<Product>
             {
             new Product { Name = "Ikura", Category = "Seafood", UnitPrice = 31.00, unitsInStock = 13 },
@@ -41,7 +44,7 @@ namespace G_NET_26_Linq_01
             new Product { Name = "Grandma's Boysenberry Spread", Category = "Condiments",UnitPrice =23.34, unitsInStock = 120 },
             new Product { Name = "Karak", Category = "Beverages",UnitPrice =4.75, unitsInStock = 35 }
             };
-
+            #endregion
             #region Q1
 
             var seafoodProducts = products.Where(p => p.Category == "Seafood");
@@ -54,6 +57,8 @@ namespace G_NET_26_Linq_01
             #endregion
             #region Q2
             Console.WriteLine();
+            Console.WriteLine("--------------------------------------------------------------");
+            Console.WriteLine();
             var productNames = products.Select(p => p.Name);
 
             foreach (var name in productNames)
@@ -63,6 +68,8 @@ namespace G_NET_26_Linq_01
 
             #endregion
             #region Q3
+            Console.WriteLine();
+            Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine();
             var sortedProducts = products.OrderBy(p => p.UnitPrice);
 
@@ -75,6 +82,8 @@ namespace G_NET_26_Linq_01
             #endregion
             #region Q4
             Console.WriteLine();
+            Console.WriteLine("--------------------------------------------------------------");
+            Console.WriteLine();
             var filteredProducts = products.Where(p => p.UnitPrice >= 10 && p.UnitPrice <= 30);
 
             foreach (var product in filteredProducts)
@@ -84,6 +93,8 @@ namespace G_NET_26_Linq_01
             #endregion
             #region Q5
             Console.WriteLine();
+            Console.WriteLine("--------------------------------------------------------------");
+            Console.WriteLine();
             var inStock = products.Where(p => p.unitsInStock > 0 && p.Category == "Condiments");
 
             foreach (var product in inStock)
@@ -92,6 +103,8 @@ namespace G_NET_26_Linq_01
             }
             #endregion
             #region Q6
+            Console.WriteLine();
+            Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine();
             var productStatus = products.Select(p => new
             {
@@ -106,6 +119,8 @@ namespace G_NET_26_Linq_01
             #endregion
             #region Q7
             Console.WriteLine();
+            Console.WriteLine("--------------------------------------------------------------");
+            Console.WriteLine();
             var idx = products.Select((p,index)=> new
             {
                 Position = index+1,
@@ -119,6 +134,8 @@ namespace G_NET_26_Linq_01
             #endregion
             #region Q8
             Console.WriteLine();
+            Console.WriteLine("--------------------------------------------------------------");
+            Console.WriteLine();
             var Sorted = products
                 .OrderBy(p => p.Category)
                 .ThenByDescending(p => p.UnitPrice);
@@ -129,6 +146,8 @@ namespace G_NET_26_Linq_01
             #endregion
             #region Q9
             Console.WriteLine();
+            Console.WriteLine("--------------------------------------------------------------");
+            Console.WriteLine();
             var BeverageSort = products
                 .Where(p =>  p.Category == "Beverages")
                 .OrderByDescending(p => p.unitsInStock);
@@ -138,6 +157,8 @@ namespace G_NET_26_Linq_01
             }
             #endregion
             #region Q10
+            Console.WriteLine();
+            Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine();
             List<Customer> customers = new List<Customer>
             {
@@ -182,6 +203,8 @@ namespace G_NET_26_Linq_01
             #endregion
             #region Q11
             Console.WriteLine();
+            Console.WriteLine("--------------------------------------------------------------");
+            Console.WriteLine();
             var idx1 = products
             .Select((p, index) => new
             {
@@ -196,6 +219,8 @@ namespace G_NET_26_Linq_01
             #endregion
             #region Q12
             Console.WriteLine();
+            Console.WriteLine("--------------------------------------------------------------");
+            Console.WriteLine();
             string[] arr = { "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
 
             var sortedWords = arr
@@ -205,6 +230,21 @@ namespace G_NET_26_Linq_01
             foreach (var word in sortedWords)
             {
                 Console.WriteLine(word);
+            }
+            #endregion
+            #region Q13
+            Console.WriteLine();
+            Console.WriteLine("--------------------------------------------------------------");
+            Console.WriteLine();
+            string[] digits = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+
+            var reversedIDigits = digits
+                .Where(d => d.Length > 1 && d[1] == 'i')
+                .Reverse();
+
+            foreach (var digit in reversedIDigits)
+            {
+                Console.WriteLine(digit);
             }
             #endregion
         }
