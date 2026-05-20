@@ -180,6 +180,20 @@ namespace G_NET_26_Linq_01
                 Console.WriteLine($"Customer: {item.CustomerID}, Date: {item.OrderDate:dd/MM/yyyy}");
             }
             #endregion
+            #region Q11
+            Console.WriteLine();
+            var idx1 = products
+            .Select((p, index) => new
+            {
+                Position = index + 1,
+                Product = p
+            });
+
+            foreach (var item in idx1)
+            {
+                Console.WriteLine($"{item.Position}. {item.Product.Name}");
+            }
+            #endregion
 
         }
     }
