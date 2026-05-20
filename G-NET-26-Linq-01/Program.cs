@@ -194,7 +194,19 @@ namespace G_NET_26_Linq_01
                 Console.WriteLine($"{item.Position}. {item.Product.Name}");
             }
             #endregion
+            #region Q12
+            Console.WriteLine();
+            string[] arr = { "aPPLE", "AbAcUs", "bRaNcH", "BlUeBeRrY", "ClOvEr", "cHeRry" };
 
+            var sortedWords = arr
+                .OrderBy(w => w.Length)
+                .ThenBy(w => w, StringComparer.OrdinalIgnoreCase);
+
+            foreach (var word in sortedWords)
+            {
+                Console.WriteLine(word);
+            }
+            #endregion
         }
     }
 }
